@@ -1,31 +1,24 @@
-
-import {Application} from 'express';
-import {Thread} from "../../../shared/model/thread";
-import {dbThreads} from "../db-data";
+import { Application } from 'express';
+import { Thread } from '../../../shared/model/thread';
+import { dbThreads } from '../db-data';
 import * as _ from 'lodash';
 
-
-
 export function apiUpdateThread(app: Application) {
+  app.route('/api/threads/:id').patch((req, res) => {
+    const participantId = req.header('userid');
 
-    app.route('/api/threads/:id').patch((req, res) => {
+    const threadId = req.params['id'];
 
-        const participantId = req.headers['userid'];
+    const updatedProps = req.body;
 
-        const threadId = req.params['id'];
+    const allThreads: Thread[] = <any>_.values(dbThreads);
 
-        const updatedProps = req.body;
+    const thread = _.find(allThreads, t => t.id === threadId);
 
-        const allThreads: Thread[] = <any> _.values(dbThreads);
+    if (updatedProps.hasOwnProperty('read')) {
+      thread.participants[participantId] = 0;
+    }
 
-        const thread = _.find(allThreads, thread =>  thread.id == threadId );
-
-        if (updatedProps.hasOwnProperty('read')) {
-            thread.participants[participantId] = 0;
-        }
-
-        res.status(200).send();
-
-    });
-
+    res.status(200).send();
+  });
 }
