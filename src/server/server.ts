@@ -2,10 +2,10 @@
 
 import * as express from 'express';
 import {Application} from 'express';
-import {apiGetUserThreads} from "./api/apiGetUserThreads";
-import {apiSaveNewMessage} from "./api/apiSaveNewMessage";
-import {apiMessageNotificationsPerUser} from "./api/apiMessageNotificationsPerUser";
-import {apiUpdateThread} from "./api/apiMarkThreadAsReadByUser";
+import {apiGetUserThreads} from './api/apiGetUserThreads';
+import {apiSaveNewMessage} from './api/apiSaveNewMessage';
+import {apiMessageNotificationsPerUser} from './api/apiMessageNotificationsPerUser';
+import {apiUpdateThread} from './api/apiMarkThreadAsReadByUser';
 const bodyParser = require('body-parser');
 
 const app: Application = express();
